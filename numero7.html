@@ -12,9 +12,9 @@
             box-sizing: border-box;
         }
         :root{
-            --primary-color: #031927;
-            --secondary-color: #508AA8;
-            --terceary-color: #9DD1F1;
+            --primary-color: #e6e6ea;
+            --secondary-color: #2ab7ca;
+            --terceary-color: #fe4a49;
 
         }
         body{
@@ -35,7 +35,7 @@
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-size: 15px;
             padding: 10px 16px;
-            color: var(--primary-color);
+            color: var(red);
         }
         .search::placeholder{
             color: var(--terceary-color);
@@ -90,7 +90,7 @@
         }
         .overview{
             background-color: #fff;
-            padding: 32px;
+            padding: 10px;
             position: absolute;
             left: 0;
             bottom: 0;
@@ -100,6 +100,8 @@
             overflow-y: auto;
             transition: transform 0.3s ease-in;
         }
+        .movie:hover .overview {
+        transform: translateY(0);}
     </style>
     <header>
         
@@ -128,18 +130,18 @@
         function showMovies(movies){
             main.innerHTML = '';
             movies.forEach((movie) => {
-                const {title, poster_path, vote_everage, overview}= movie;
+                const {title, poster_path, vote_average, overview}= movie;
                 const movieElements = document.createElement('div');
                 movieElements.classList.add('movie');
                 movieElements.innerHTML=`
-                <img scr = "${IMG_PATH + poster_path}" alt="${title}">
+                <img src = "${IMG_PATH + poster_path}" alt="${title}">
                 <div class="movie-info">
                     <h3>${title}</h3>
-                    <span class = "${getClassByRate(vote_everage)}">
+                    <span class = "${getClassByRate(vote_average)}">
                         ${vote_average}</span>
                         </div>
                         <div class = "overview">
-                            <h3>overview</h3>
+                            <h3>Overview</h3>
                             ${overview}
                             </div>`
                     main.appendChild(movieElements);
@@ -157,7 +159,7 @@
                     const searchTerm = search.value;
                     if(searchTerm && searchTerm !==''){
                         getMovies(SEARCH_API + searchTerm)
-                        search.values='';
+                        search.value='';
                     }else{window.location.reload();}
                     })
                 
